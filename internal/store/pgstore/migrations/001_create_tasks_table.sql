@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     priority INT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-)
+);
 
 ---- create above / drop below ----
 

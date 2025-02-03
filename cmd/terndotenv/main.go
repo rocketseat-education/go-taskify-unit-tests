@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main () {
+func main() {
 	if err := godotenv.Load(); err != nil {
 		panic(err)
 	}
@@ -23,8 +23,9 @@ func main () {
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println("Command exec failed", err)
-		fmt.Println("output", string(output))
+		fmt.Println("Command exec failed: ", err)
+		fmt.Println("output: ", string(output))
+		return
 	}
 
 	fmt.Println("Executed with success!!!\n", string(output))

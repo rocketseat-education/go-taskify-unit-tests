@@ -6,6 +6,6 @@ import (
 )
 
 type Application struct {
-	Router *chi.Mux
+	Router      *chi.Mux
 	TaskService services.TaskService
 }

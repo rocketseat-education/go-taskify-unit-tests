@@ -6,17 +6,15 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"github.com/rocketseat-education/taskfy/internal/store/pgstore"
 )
 
-
 func TestHandleCreateTask(t *testing.T) {
-	api := Application{TaskService: pgstore.NewPGTaskStore(nil)}
+	api := Application{}
 
 	payload := map[string]any{
-		"title": 	"Learn TDD",
-		"description": "Get hands-on exp with TDD in Go",
-		"priority": 	8000,
+		"title":       "Learn TDD",
+		"description": "Get hands-on exp with TDD in Go!",
+		"priority":    8000,
 	}
 
 	body, err := json.Marshal(payload)
@@ -29,7 +27,8 @@ func TestHandleCreateTask(t *testing.T) {
 
 	rec := httptest.NewRecorder()
 
-	handler := http.HandlerFunc(api.handleCreateTAsk)
+	handler := http.HandlerFunc(api.handleCreateTask)
+
 	handler.ServeHTTP(rec, req)
 
 	t.Logf("Rec body %s\n", rec.Body.Bytes())
@@ -39,11 +38,9 @@ func TestHandleCreateTask(t *testing.T) {
 	}
 
 	var resBody map[string]any
-
 	err = json.Unmarshal(rec.Body.Bytes(), &resBody)
-
 	if err != nil {
-		t.Fatalf("failed to parse response body: %s\n", err.Error())
+		t.Fatalf("Failed to parse response body: %s\n", err.Error())
 	}
 
 	if resBody["title"] != payload["title"] {
