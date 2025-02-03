@@ -6,11 +6,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"github.com/rocketseat-education/taskfy/internal/store/pgstore"
 )
 
 
 func TestHandleCreateTask(t *testing.T) {
-	api := Application{}
+	api := Application{TaskService: pgstore.NewPGTaskStore(nil)}
 
 	payload := map[string]any{
 		"title": 	"Learn TDD",
